@@ -25,7 +25,4 @@ Route::prefix('api')->group(function () {
     Route::resource('orders', 'OrderController')->except(['create', 'edit']);
     Route::post('orders/{id}/add', 'OrderController@addProduct');
     Route::post('orders/{id}/pay', 'OrderController@payOrder');
-    
-    // Route::resource('customers', 'CustomerController')->except(['create', 'edit', 'index', 'store', 'show', 'update', 'destroy']);
-    // Route::resource('products', 'ProductController')->except(['create', 'edit', 'index', 'store', 'show', 'update', 'destroy']);
 });
