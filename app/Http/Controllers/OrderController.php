@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Services\SuperPaymentService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
@@ -129,6 +131,42 @@ class OrderController extends Controller
         } catch (\Exception $exception) {
             Log::error('An exception occurred: ' . $exception->getMessage());
             throw new BadRequestHttpException('Failed to add product to order');
+        }
+    }
+
+    public function payOrder(Request $request, $id)
+    {
+        try {
+            $order = Order::with('products')->with('customer')->findOrFail($id);
+
+            // Check if the order is already paid
+            if ($order->paid) {
+                return ResponseFacade::failure('Order is already paid', 422);
+            }
+            $email = $order->customer->email;
+            $value = $order->products->sum('price');
+
+            // Create a new PaymentService instance
+            $paymentService = new SuperPaymentService();
+
+            // Attempt to make the payment
+            $paymentResult = $paymentService->makePayment($id, $email, $value );
+
+            if ($paymentResult) {
+                // Update the order status to paid
+                $order->paid = true;
+                $order->save();
+
+                return ResponseFacade::success(['order' => $order], 'Order payment successful');
+            } else {
+                return ResponseFacade::failure('Payment failed. Insufficient funds', 422);
+            }
+        } catch (ModelNotFoundException $exception) {
+            Log::error('An exception occurred: ' . $exception->getMessage());
+            return ResponseFacade::notFound('Order not found');
+        } catch (\Exception $exception) {
+            Log::error('An exception occurred: ' . $exception->getMessage());
+            return ResponseFacade::failure('Failed to process payment', 500);
         }
     }
 }
