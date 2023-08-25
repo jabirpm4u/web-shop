@@ -6,21 +6,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\Product;
 use App\Services\SuperPaymentService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+use Illuminate\Validation\ValidationException;
 
 class OrderController extends Controller
 {
-    // ... Other methods
 
     public function index()
     {
         try {
 
-            $orders = Order::orderBy('id', 'desc')->paginate(10);
+            $orders = Order::with('customer:id,first_name')->orderBy('id', 'desc')->paginate(10);
             return ResponseFacade::success($orders, 'Orders listed successfully');
 
         } catch (\Exception $exception) {
@@ -35,7 +35,7 @@ class OrderController extends Controller
     {
         try {
             
-            $order = Order::findOrFail($id);
+            $order = Order::with('customer:id,first_name,last_name,email,phone')->findOrFail($id);
             return ResponseFacade::success($order, 'Order fetched successfully');
 
         } catch (\Exception $exception) {
@@ -55,10 +55,16 @@ class OrderController extends Controller
             $order = Order::create($validatedData);
             return ResponseFacade::success($order, 'Order created successfully',201);
 
-        } catch (\Exception $exception) {
+        } 
+        catch (ValidationException $exception) {
+            Log::error('An exception occurred: ' . $exception->getMessage());
+            $errors = $exception->validator->errors();
+            return ResponseFacade::validationfailed( $errors);
+        }
+        catch (\Exception $exception) {
 
             Log::error('An exception occurred: ' . $exception->getMessage());
-            return ResponseFacade::failure( 'Failed to create order');
+            return ResponseFacade::failure( $exception->getMessage());
         }
     }
 
@@ -72,13 +78,19 @@ class OrderController extends Controller
             }
 
             $validatedData = $request->validate([
-                'customer_id' => 'sometimes|required|exists:customers,id'
+                'customer_id' => 'required|exists:customers,id'
             ]);
 
             $order->update($validatedData);
-            return ResponseFacade::success($order, 'Order created successfully');
+            return ResponseFacade::success($order, 'Order updated successfully');
 
-        } catch (\Exception $exception) {
+        } 
+        catch (ValidationException $exception) {
+            Log::error('An exception occurred: ' . $exception->getMessage());
+            $errors = $exception->validator->errors();
+            return ResponseFacade::validationfailed( $errors);
+        }
+        catch (\Exception $exception) {
             Log::error('An exception occurred: ' . $exception->getMessage());
             return ResponseFacade::failure( 'Failed to update order');
         }
@@ -118,22 +130,50 @@ class OrderController extends Controller
             $validatedData = $request->validate([
                 'product_id' => 'required|exists:products,id',
             ]);
+
             if(OrderProduct::where('order_id',$id)->where('product_id',$request->product_id)->exists()){
                 return ResponseFacade::failure( 'Product already added to order');
             }
+            $product = Product::findOrFail($request->product_id);
+
             // Create a new OrderProduct relationship
             $orderProduct = new OrderProduct($validatedData);
             $orderProduct->order_id = $id;
             $orderProduct->product_id = $request->product_id;
+            $orderProduct->price = $product->price; // this might be useful in future by reducing joins
             $orderProduct->save();
 
+            // order master table
+            $order->product_count = $order->product_count + 1;
+            $order->total_amount = $product->price;
+            $order->update();
+
             return ResponseFacade::success([], 'Product added to order successfully',201);
+        }
+        catch (ValidationException $exception) {
+            Log::error('An exception occurred: ' . $exception->getMessage());
+            $errors = $exception->validator->errors();
+            return ResponseFacade::validationfailed( $errors);
         } catch (\Exception $exception) {
             Log::error('An exception occurred: ' . $exception->getMessage());
             throw new BadRequestHttpException('Failed to add product to order');
         }
     }
 
+    public function orderProducts()
+    {
+        try {
+
+            $orderProducts = OrderProduct::with('product:id,productname')->select('id','product_id','price','created_at')->orderBy('created_at', 'desc')->paginate(10);
+            return ResponseFacade::success($orderProducts, 'Order Products listed successfully');
+
+        } catch (\Exception $exception) {
+
+            Log::error('An exception occurred: ' . $exception->getMessage());
+            return ResponseFacade::failure( 'Failed to fetch Order Products');
+
+        }
+    }
     public function payOrder(Request $request, $id)
     {
         try {

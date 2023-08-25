@@ -27,4 +27,11 @@ class ResponseService
             'message' => $message,
         ], $statusCode);
     }
+    public function validationfailed($errors, $message = 'Not Found', $statusCode = 422)
+    {
+        return response()->json([
+            'message' => $message,
+            'errors' => $errors,
+        ], $statusCode);
+    }
 }

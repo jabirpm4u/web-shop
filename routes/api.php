@@ -1,28 +1,15 @@
 <?php
-
-use Illuminate\Http\Request;
+namespace App;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
-Route::prefix('api')->group(function () {
-
-    Route::post('import-master-data', 'ImportController@import');
-    
-    Route::resource('orders', 'OrderController')->except(['create', 'edit']);
-    Route::post('orders/{id}/add', 'OrderController@addProduct');
-    Route::post('orders/{id}/pay', 'OrderController@payOrder');
-});
+Route::resource('orders', OrderController::class)->except(['create', 'edit']);
+Route::post('/orders/{id}/add', [OrderController::class, 'addProduct']);
+Route::get('/orders/{id}/products', [OrderController::class, 'orderProducts']);
+Route::post('/orders/{id}/pay', [OrderController::class, 'payOrder']);
