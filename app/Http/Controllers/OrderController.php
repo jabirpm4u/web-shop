@@ -177,14 +177,14 @@ class OrderController extends Controller
     public function payOrder(Request $request, $id)
     {
         try {
-            $order = Order::with('products')->with('customer')->findOrFail($id);
+            $order = Order::with('customer')->findOrFail($id);
 
             // Check if the order is already paid
             if ($order->paid) {
                 return ResponseFacade::failure('Order is already paid', 422);
             }
             $email = $order->customer->email;
-            $value = $order->products->sum('price');
+            $value = $order->total_amount;
 
             // Create a new PaymentService instance
             $paymentService = new SuperPaymentService();
