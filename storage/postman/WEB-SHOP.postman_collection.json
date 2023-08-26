@@ -1,0 +1,826 @@
+{
+	"info": {
+		"_postman_id": "582f569f-58d9-4635-b7f5-677a47c6c9d7",
+		"name": "WEB-SHOP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LIST ALL ORDERS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "LIST ALL ORDERS",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 17:48:06 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 17:48:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2-1ubuntu2.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Orders listed successfully\",\n    \"data\": {\n        \"current_page\": 1,\n        \"data\": [\n            {\n                \"id\": 3,\n                \"customer_id\": 4,\n                \"paid\": 0,\n                \"created_at\": \"2023-08-25T16:13:33.000000Z\",\n                \"updated_at\": \"2023-08-25T16:13:33.000000Z\",\n                \"total_amount\": \"0.00\",\n                \"product_count\": 0,\n                \"customer\": {\n                    \"id\": 4,\n                    \"first_name\": \"Ivy\"\n                }\n            },\n            {\n                \"id\": 2,\n                \"customer_id\": 2,\n                \"paid\": 0,\n                \"created_at\": \"2023-08-25T16:01:28.000000Z\",\n                \"updated_at\": \"2023-08-25T16:01:28.000000Z\",\n                \"total_amount\": \"0.00\",\n                \"product_count\": 0,\n                \"customer\": {\n                    \"id\": 2,\n                    \"first_name\": \"Gemma\"\n                }\n            },\n            {\n                \"id\": 1,\n                \"customer_id\": 9,\n                \"paid\": 0,\n                \"created_at\": \"2023-08-25T15:52:31.000000Z\",\n                \"updated_at\": \"2023-08-25T16:37:33.000000Z\",\n                \"total_amount\": \"146.60\",\n                \"product_count\": 3,\n                \"customer\": {\n                    \"id\": 9,\n                    \"first_name\": \"Makena\"\n                }\n            }\n        ],\n        \"first_page_url\": \"http://localhost:8000/api/orders?page=1\",\n        \"from\": 1,\n        \"last_page\": 1,\n        \"last_page_url\": \"http://localhost:8000/api/orders?page=1\",\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/orders?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"next_page_url\": null,\n        \"path\": \"http://localhost:8000/api/orders\",\n        \"per_page\": 10,\n        \"prev_page_url\": null,\n        \"to\": 3,\n        \"total\": 3\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "SHOW AN ORDER",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/orders/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"orders",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "SHOW AN ORDER",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/orders/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"orders",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 17:48:18 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 17:48:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2-1ubuntu2.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Order fetched successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"customer_id\": 9,\n        \"paid\": 0,\n        \"created_at\": \"2023-08-25T15:52:31.000000Z\",\n        \"updated_at\": \"2023-08-25T16:37:33.000000Z\",\n        \"total_amount\": \"146.60\",\n        \"product_count\": 3,\n        \"customer\": {\n            \"id\": 9,\n            \"first_name\": \"Makena\",\n            \"last_name\": \"Connor\",\n            \"email\": \"Makena_Connor1759@gembat.biz\",\n            \"phone\": \"2-033-501-5266\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "UPDATE AN ORDER",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "customer_id",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/orders/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"orders",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "UPDATE AN ORDER",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "customer_id",
+									"value": "4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/orders/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"orders",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 16:12:14 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 16:12:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2-1ubuntu2.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Order updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"customer_id\": 1,\n        \"paid\": 0,\n        \"created_at\": \"2023-08-25T15:52:31.000000Z\",\n        \"updated_at\": \"2023-08-25T15:52:31.000000Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "CREATE AN ORDER",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "customer_id",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "CREATE AN ORDER",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "customer_id",
+									"value": "4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 16:13:33 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 16:13:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2-1ubuntu2.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Order created successfully\",\n    \"data\": {\n        \"customer_id\": \"4\",\n        \"updated_at\": \"2023-08-25T16:13:33.000000Z\",\n        \"created_at\": \"2023-08-25T16:13:33.000000Z\",\n        \"id\": 3\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "ADD A PRODUCT TO ORDER",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "product_id",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/orders/1/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"orders",
+						"1",
+						"add"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ADD A PRODUCT TO ORDER",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "product_id",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/orders/1/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"orders",
+								"1",
+								"add"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 16:53:04 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 16:53:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2-1ubuntu2.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "57"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Product added to order successfully\",\n    \"data\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "LIST ORDER PRODUCTS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/orders/1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"orders",
+						"1",
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "LIST ORDER PRODUCTS",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/orders/1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"orders",
+								"1",
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 17:46:59 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 17:46:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2-1ubuntu2.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Order Products listed successfully\",\n    \"data\": {\n        \"current_page\": 1,\n        \"data\": [\n            {\n                \"id\": 3,\n                \"product_id\": 6,\n                \"price\": \"49.37\",\n                \"created_at\": \"2023-08-25T17:30:39.000000Z\",\n                \"product\": {\n                    \"id\": 6,\n                    \"productname\": \"Calvin Klein\"\n                }\n            },\n            {\n                \"id\": 2,\n                \"product_id\": 5,\n                \"price\": \"81.02\",\n                \"created_at\": \"2023-08-25T16:53:04.000000Z\",\n                \"product\": {\n                    \"id\": 5,\n                    \"productname\": \"Izod\"\n                }\n            },\n            {\n                \"id\": 1,\n                \"product_id\": 4,\n                \"price\": \"16.21\",\n                \"created_at\": \"2023-08-25T16:40:32.000000Z\",\n                \"product\": {\n                    \"id\": 4,\n                    \"productname\": \"Angels Jeanswear\"\n                }\n            }\n        ],\n        \"first_page_url\": \"http://localhost:8000/api/orders/1/products?page=1\",\n        \"from\": 1,\n        \"last_page\": 1,\n        \"last_page_url\": \"http://localhost:8000/api/orders/1/products?page=1\",\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/orders/1/products?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"next_page_url\": null,\n        \"path\": \"http://localhost:8000/api/orders/1/products\",\n        \"per_page\": 10,\n        \"prev_page_url\": null,\n        \"to\": 3,\n        \"total\": 3\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "PAY ORDER",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "product_id",
+							"value": "6",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/orders/2/pay",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"orders",
+						"2",
+						"pay"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "PAY ORDER",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/orders/2/pay",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"orders",
+								"2",
+								"pay"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 26 Aug 2023 17:41:32 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 26 Aug 2023 17:41:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2-1ubuntu2.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Order payment successful\",\n    \"data\": {\n        \"order\": {\n            \"id\": 2,\n            \"customer_id\": 2,\n            \"paid\": 1,\n            \"created_at\": \"2023-08-25T16:01:28.000000Z\",\n            \"updated_at\": \"2023-08-26T17:41:32.000000Z\",\n            \"total_amount\": \"0.00\",\n            \"product_count\": 0,\n            \"customer\": {\n                \"id\": 2,\n                \"job_title\": \"Mobile Developer\",\n                \"email\": \"Gemma_King244@cispeto.com\",\n                \"first_name\": \"Gemma\",\n                \"last_name\": \"King\",\n                \"registered_since\": \"2019-05-15\",\n                \"phone\": \"4-131-225-0286\",\n                \"created_at\": \"2023-08-23T19:16:48.000000Z\",\n                \"updated_at\": \"2023-08-23T19:16:48.000000Z\"\n            }\n        }\n    }\n}"
+				}
+			]
+		}
+	]
+}

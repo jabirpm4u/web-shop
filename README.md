@@ -52,6 +52,17 @@ This command will import data from the provided CSV files and log the import res
 For a more detailed overview of the available endpoints and how to interact with the API, you can refer to the 
 (https://documenter.getpostman.com/view/25159750/2s9Y5YRhao). This documentation provides examples of request and response structures for each endpoint.
 
+
+## Usage
+
+To test the APIs, you can import the Postman collection JSON file provided in the `storage/postman` directory. Follow these steps:
+
+1. Open Postman.
+2. Click on the "Import" button.
+3. Choose "Import From File" and select the JSON file from the `storage/postman` directory.
+4. The collection will be imported, and you can start testing the APIs using the predefined requests.
+
+
 ## Estimated and Tracked Time
 
 ### Estimated Time
