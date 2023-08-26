@@ -183,6 +183,11 @@ class OrderController extends Controller
             if ($order->paid) {
                 return ResponseFacade::failure('Order is already paid', 422);
             }
+
+            if (!$order->total_amount > 0) {
+                return ResponseFacade::failure('Order total_amount should be greater than zero', 422);
+            }
+
             $email = $order->customer->email;
             $value = $order->total_amount;
 

@@ -5,7 +5,7 @@ This project is a mini web shop API implemented using Laravel. It provides funct
 ## Installation
 
 1. Clone the repository:
-git clone <repository_url>
+git clone https://github.com/jabirpm4u/web-shop.git
 cd api-webshop
 
 
