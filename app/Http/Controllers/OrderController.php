@@ -194,10 +194,10 @@ class OrderController extends Controller
 
             if ($paymentResult) {
                 // Update the order status to paid
-                $order->paid = true;
-                $order->save();
+                $order->paid = 1;
+                $order->update();
 
-                return ResponseFacade::success(['order' => $order], 'Order payment successful');
+                return ResponseFacade::success([], 'Order payment successful');
             } else {
                 return ResponseFacade::failure('Payment failed. Insufficient funds', 422);
             }
